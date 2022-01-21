@@ -1,0 +1,23 @@
+{
+  "name": "pressscraping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdelineSire/PressScraping.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdelineSire/PressScraping/issues"
+  },
+  "homepage": "https://github.com/AdelineSire/PressScraping#readme",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "puppeteer": "^13.1.1"
+  }
+}
