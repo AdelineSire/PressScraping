@@ -3,7 +3,7 @@ require('dotenv').config();
 const puppeteer = require('puppeteer');
 const { UNI_USERNAME, UNI_PASSWORD, UNI_URL, EUROPRESS_URL } = process.env;
 
-const start = async () => {
+const start = async (keyWord) => {
 	// Login
 	const browser = await puppeteer.launch({ headless: false });
 	const page = await browser.newPage();
@@ -30,10 +30,12 @@ const start = async () => {
 
 	// Search
 	await page.focus('#Keywords');
-	await page.keyboard.type('Zemmour');
+	await page.keyboard.type(keyWord);
 	await page.click('#btnSearch');
+
+	//
 
 	// await browser.close();
 };
 
-start();
+start('Zemmour');
