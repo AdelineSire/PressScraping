@@ -1,11 +1,12 @@
 [
 	{
 		"date": "",
-		"keyword": "",
+		"keywords": [],
 		"results": [
 			{
-				"newspaper": "",
-				"title": ""
+				"keyword": "",
+				"count": "",
+				"articles": [{ "newspaper": "", "title": "" }]
 			}
 		]
 	}
