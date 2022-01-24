@@ -3,7 +3,7 @@ require('dotenv').config();
 const puppeteer = require('puppeteer');
 const { UNI_USERNAME, UNI_PASSWORD, UNI_URL, EUROPRESS_URL } = process.env;
 
-const start = async (keyWord) => {
+const start = async (keyword) => {
 	// Login
 	const browser = await puppeteer.launch({ headless: false });
 	const page = await browser.newPage();
@@ -30,10 +30,24 @@ const start = async (keyWord) => {
 
 	// Search
 	await page.focus('#Keywords');
-	await page.keyboard.type(keyWord);
-	await page.click('#btnSearch');
+	await page.keyboard.type(keyword);
 
-	//
+	await Promise.all([
+		await page.click('#btnSearch'),
+		page.waitForSelector('.documentList'),
+	]);
+
+	const evaluatedResults = await page.evaluate(() => {
+		const results = [];
+		document.querySelectorAll('.docListItem').forEach((el) => {
+			const newspaper = el.querySelector('.source-name').textContent;
+			const title = el.querySelector('.docList-links').textContent;
+			results.push({ newspaper, title });
+		});
+		return results;
+	});
+
+	console.log('evaluatedResults: ', evaluatedResults);
 
 	// await browser.close();
 };
