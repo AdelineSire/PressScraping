@@ -63,11 +63,10 @@ const scrapArticles = async (keywords) => {
 		});
 
 		// Push in results
-		results.push({ keyword, count, articles });
+		results.push({ keyword, articles });
 	};
 
-	const results = [];
-
+	// Execute
 	keywords.forEach((keyword) => {
 		getArticles(keyword);
 	});

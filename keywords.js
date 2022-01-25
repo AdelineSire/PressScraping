@@ -16,4 +16,4 @@
 // ];
 const keywords = ['Taubira', 'Pécresse'];
 
-module.exports = { keywords };
+module.exports = keywords;
