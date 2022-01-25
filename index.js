@@ -57,7 +57,7 @@ const scrapArticles = async (keywords) => {
 			document.querySelectorAll('.docListItem').forEach((el) => {
 				const newspaper = el.querySelector('.source-name').textContent;
 				const title = el.querySelector('.docList-links').textContent;
-				results.push({ newspaper, title });
+				evaluatedArticles.push({ newspaper, title });
 			});
 			return evaluatedArticles;
 		});
@@ -71,7 +71,7 @@ const scrapArticles = async (keywords) => {
 		getArticles(keyword);
 	});
 
-	await browser.close();
+	// await browser.close();
 
 	return results;
 };
