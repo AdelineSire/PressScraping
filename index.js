@@ -20,6 +20,8 @@ const scrapArticles = async (keywords) => {
 		page.waitForNavigation(),
 	]);
 
+	const results = [];
+
 	const getArticles = async (keyword) => {
 		// Go to the page and wait until loaded
 		await Promise.all([
@@ -43,15 +45,6 @@ const scrapArticles = async (keywords) => {
 			page.waitForSelector('.docListItem'),
 		]);
 
-		// // Get the number of articles
-		// const pageCount = document.querySelector(
-		// 	'#documentLoadedCount'
-		// ).textContent;
-		// const totalCount = document.querySelector(
-		// 	'#documentLoadedCount'
-		// ).textContent;
-
-		// Get articles
 		const articles = await page.evaluate(() => {
 			const evaluatedArticles = [];
 			document.querySelectorAll('.docListItem').forEach((el) => {
@@ -71,13 +64,17 @@ const scrapArticles = async (keywords) => {
 		getArticles(keyword);
 	});
 
-	// await browser.close();
+	await browser.close();
 
 	return results;
 };
 
-const results = scrapArticles(keywords);
-console.log('typeof results: ', typeof results);
+const start = async (keywords) => {
+	const results = await scrapArticles(keywords);
+	console.log('results: ', results);
+};
+
+start(keywords);
 
 // const data = JSON.stringify(results, null, 2);
 // fs.writeFile('./data', data);
