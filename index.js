@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const fs = require('fs');
+const fs = require('fs').promises;
 const puppeteer = require('puppeteer');
 
 const { UNI_USERNAME, UNI_PASSWORD, UNI_URL, EUROPRESS_URL } = process.env;
@@ -60,9 +60,9 @@ const scrapArticles = async (keywords) => {
 	};
 
 	// Execute
-	keywords.forEach((keyword) => {
-		getArticles(keyword);
-	});
+	for (const keyword of keywords) {
+		await getArticles(keyword);
+	}
 
 	await browser.close();
 
@@ -71,10 +71,8 @@ const scrapArticles = async (keywords) => {
 
 const start = async (keywords) => {
 	const results = await scrapArticles(keywords);
-	console.log('results: ', results);
+	const data = JSON.stringify(results);
+	await fs.writeFile('./data.json', data);
 };
 
 start(keywords);
-
-// const data = JSON.stringify(results, null, 2);
-// fs.writeFile('./data', data);
