@@ -42,7 +42,7 @@ const scrapArticles = async (keywords) => {
 		// Search and wait for results
 		await Promise.all([
 			await page.click('#btnSearch'),
-			page.waitForSelector('.docListItem'),
+			page.waitForSelector('#titleResultList'),
 		]);
 
 		const articles = await page.evaluate(() => {
